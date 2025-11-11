@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* シックな白黒デザイン */
+  --color-background: oklch(98% 0 0); /* 真っ白より少し柔らかい白 */
+  --color-foreground: oklch(15% 0 0); /* 深い黒 */
+  --color-card: oklch(100% 0 0); /* カードは純白 */
+  --color-card-foreground: oklch(15% 0 0);
+  --color-popover: oklch(100% 0 0);
+  --color-popover-foreground: oklch(15% 0 0);
+  --color-primary: oklch(15% 0 0); /* 主要カラーは黒 */
+  --color-primary-foreground: oklch(98% 0 0);
+  --color-secondary: oklch(92% 0 0); /* ライトグレー */
+  --color-secondary-foreground: oklch(15% 0 0);
+  --color-muted: oklch(94% 0 0); /* ミューテッドカラー */
+  --color-muted-foreground: oklch(50% 0 0); /* ミドルグレー */
+  --color-accent: oklch(88% 0 0); /* アクセントはダークグレー */
+  --color-accent-foreground: oklch(15% 0 0);
+  --color-destructive: oklch(50% 0.15 20); /* 控えめな赤 */
+  --color-destructive-foreground: oklch(98% 0 0);
+  --color-border: oklch(85% 0 0); /* ボーダーはミドルグレー */
+  --color-input: oklch(95% 0 0); /* インプットは明るいグレー */
+  --color-ring: oklch(15% 0 0); /* フォーカスリングは黒 */
+  --radius-base: 0.75rem; /* 少し丸みを持たせる */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* モバイルファースト：スムーズなスクロール */
+html {
+  scroll-behavior: smooth;
+  /* フォントサイズを16px以上に設定してiOSのズーム無効化 */
+  font-size: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* モバイルファースト：タップハイライトを無効化 */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* モバイルファースト：安全領域を考慮 */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: env(safe-area-inset-bottom);
+  /* テキストサイズ調整を無効化（iOSで横向き時にテキストが拡大されるのを防ぐ） */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* タッチデバイス向け：アクティブ状態のスタイル */
+.active\:scale-98:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
 }
